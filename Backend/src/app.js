@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 
+//use api v1
+const v1 = require("./routes/v1");
+
 const app = express();
 
 // -------- DB Config ------//
@@ -29,11 +32,6 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // -------- Routes ------//
-app.post("/hello", (req, res) => {
-  const name = req.body.name;
-  res.send({
-    message: `welcome ${name}`
-  });
-});
+app.use("/api/v1", v1); // any request fall under the prefix /ai/v2 go to v1 and deal with it
 
 module.exports = app;
