@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MERN stack app",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.5",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index",
+    "dev": " nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chihabSD/MERN-ExpenseApp.git"
+  },
+  "author": "Chihabeddine Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chihabSD/MERN-ExpenseApp/issues"
+  },
+  "homepage": "https://github.com/chihabSD/MERN-ExpenseApp#readme"
+}
