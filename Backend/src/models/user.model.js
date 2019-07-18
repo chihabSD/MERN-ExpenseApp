@@ -9,8 +9,8 @@ const { Schema } = mongoose;
 
 // Once we have the Shema from mongoose now we can create an object
 const UserSchema = Schema({
-  name: { type: String, required: true, index: true, unique: true },
-  email: { type: String, required: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true, index: true, unique: true },
   password: { type: String, required: true },
   joined: { type: Date, default: new Date() }
 });
