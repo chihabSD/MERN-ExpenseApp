@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const bcrypt = require("bcryptjs");
 /**
  * Define the schema
  * the (Schema is found in mongoose)
@@ -15,6 +15,25 @@ const UserSchema = Schema({
   joined: { type: Date, default: new Date() }
 });
 
+//Before the user is saved encrypt the password
+UserSchema.pre("save", async function(next) {
+  // check if its a new account to be saved or password modified
+  if (!this.isModified("password")) {
+    // is password being changed?
+    return next();
+  }
+
+  //encryp the password
+  try {
+    const salt = await bcrypt.genSalt(10); // generate salt 10
+    const hashedPassword = await bcrypt.hash(this.password, salt); // then use salt value on password
+    this.password = hashedPassword;
+    next();
+  } catch (e) {
+    // in case of error?
+    return next(e);
+  }
+});
 // our model will be the userSchema and the allias is User
 const User = mongoose.model("User", UserSchema);
 
