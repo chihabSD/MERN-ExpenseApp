@@ -34,4 +34,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // -------- Routes ------//
 app.use("/api/v1", v1); // any request fall under the prefix /ai/v2 go to v1 and deal with it
 
+// -------- Eroors ----- //
+
+//Any error happens go to (err in the next fundtion) and handle it
+app.use((req, res, next) => {
+  //create instance of error and give it a message
+  var err = new Error("Page not found");
+  err.status = 404; // error has property of 404
+  next(err); // next handler
+});
+
+// handly any error here
+app.use((err, req, res, next) => {
+  // pass error status or interneral server error
+  const status = err.status || 500;
+  const error = err.message || "Error processing your request"; //err.message is coming from new Error object
+
+  res.status(status).send({
+    error
+  });
+});
+
 module.exports = app;
