@@ -34,6 +34,20 @@ UserSchema.pre("save", async function(next) {
     return next(e);
   }
 });
+
+//compare pasword with hashedpassword
+UserSchema.methods.isPasswordMatch = function(
+  password,
+  hashedPassword,
+  callback
+) {
+  bcrypt.compare(password, hashedPassword, (err, success) => {
+    if (err) {
+      return callback(err);
+    }
+    callback(null, success);
+  }); // check password vs hashedbasspowrd
+};
 // our model will be the userSchema and the allias is User
 const User = mongoose.model("User", UserSchema);
 
