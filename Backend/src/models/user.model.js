@@ -48,6 +48,13 @@ UserSchema.methods.isPasswordMatch = function(
     callback(null, success);
   }); // check password vs hashedbasspowrd
 };
+
+//When we login we return json without password
+UserSchema.methods.toJSON = function() {
+  const userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
+};
 // our model will be the userSchema and the allias is User
 const User = mongoose.model("User", UserSchema);
 
