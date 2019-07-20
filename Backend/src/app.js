@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const passport = require("passport");
 
 //use api v1
 const v1 = require("./routes/v1");
@@ -29,6 +30,13 @@ mongoose.connection.on("error", err => {
 
 // -------- Middlewares------//
 app.use(logger("dev"));
+
+//init passport
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/passport")(passport);
+
+//init body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

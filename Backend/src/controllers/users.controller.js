@@ -1,6 +1,7 @@
 /**
  * Handle the login of signup, login etc
  */
+const jwt = require("jsonwebtoken"); // require the JSON web token
 const User = require("../models/user.model"); //Go to models and grab the user.model
 const userController = {};
 
@@ -61,7 +62,22 @@ userController.login = async (req, res, next) => {
     user.isPasswordMatch(password, user.password, (err, matched) => {
       // if password matched
       if (matched) {
-        return res.send({ message: " You can login " });
+        // if password and email are okay then do JWT
+        const secret = process.env.JWT_SECRET;
+        const expire = process.env.JWT_EXPIRATION;
+
+        /**
+         * argument 1: payload which is object of id (_id: user._id)
+         * argument 2: secret key
+         * argument 3: object of expiary date
+         *
+         */
+        const token = jwt.sign({ _id: user._id }, secret, {
+          expiresIn: expire
+        });
+        return res.send({ token }); // send us back the token
+        // secret
+        // expiration
       }
       res.status(401).send({
         error: "Invalid username/password combination"
