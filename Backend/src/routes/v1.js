@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-
 const userController = require("../controllers/users.controller");
+const expenseController = require("../controllers/expense.contoller");
 
 //Auth and signup
 router.post("/register", userController.register);
@@ -30,11 +30,9 @@ router.all("*", (req, res, next) => {
  * tell the authenticate that i want to use jwt strategy and sesssion
  *
  */
-router.get("/expense", (req, res, next) => {
-  return res.send({
-    message: " You are authenticated ",
-    user: req.user
-  });
-});
-
+router.get("/profile", userController.profile);
+router.post("/expense", expenseController.createExpense);
+router.get("/expense", expenseController.get);
+router.delete("/expense/:expense_id", expenseController.deleteExpense);
+router.put("/expense/:expense_id", expenseController.updateExpense);
 module.exports = router;
