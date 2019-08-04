@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const passport = require("passport");
 
 //use api v1
@@ -30,7 +31,7 @@ mongoose.connection.on("error", err => {
 
 // -------- Middlewares------//
 app.use(logger("dev"));
-
+app.use(cors());
 //init passport
 app.use(passport.initialize());
 app.use(passport.session());

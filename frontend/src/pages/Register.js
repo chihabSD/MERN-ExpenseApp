@@ -1,47 +1,11 @@
 import React, { Component } from "react";
-import {
-  Button,
-  FormGroup,
-  Label,
-  Input,
-  FormFeedback,
-  Alert
-} from "reactstrap";
+import { Button, FormGroup, Label, Input, FormFeedback } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
-// Connect Login UI with redux
-import { connect } from "react-redux";
-import { signIn } from "../actions";
-
-class LoginPage extends Component {
-  /**
-   * When we get the response from the server
-   * we want to handle it here
-   * thus we can use componentDidUPdate
-   */
-  componentDidUpdate() {
-    //distruc error from props
-    const { error, isAuth } = this.props;
-    if (error && this.bag) {
-      this.bag.setSubmitting(false);
-    }
-    if (isAuth) {
-      this.props.history.push("/");
-    }
-  }
-  __handleFormSubmit(values, bag) {
-    // console.log(values);
-    this.props.signIn(values);
-    this.bag = bag;
-  }
-  _renderErrorIfAny() {
-    const { error } = this.props;
-    /**If there is any error return it */
-    if (error) {
-      return <Alert color="danger">{error}</Alert>;
-    }
+class Register extends Component {
+  __handleFormSubmit(values) {
+    console.log(values);
   }
   render() {
     const login = {
@@ -66,14 +30,15 @@ class LoginPage extends Component {
     return (
       <div style={login}>
         {/*<i class="fas fa-unlock-alt fa-5x" style={i} />**/}
-        <h3>Sign in to your account </h3>
+        <h3>Register a new account </h3>
         <hr />
-        {/** Render errorss */}
-        {this._renderErrorIfAny()}
         <Formik
-          inititalValues={{ email: "", password: "" }}
+          inititalValues={{ name: "", email: "", password: "" }}
           onSubmit={this.__handleFormSubmit.bind(this)}
           validationSchema={Yup.object().shape({
+            name: Yup.string()
+              .min(6)
+              .required(),
             email: Yup.string()
               .email()
               .required(),
@@ -91,6 +56,20 @@ class LoginPage extends Component {
             touched
           }) => (
             <div>
+              <FormGroup>
+                <Label>Name</Label>
+                <Input
+                  invalid={errors.name && touched.name}
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.name && touched.name ? (
+                  <FormFeedback>{errors.name}</FormFeedback>
+                ) : null}
+              </FormGroup>
               <FormGroup>
                 <Label>Email</Label>
                 <Input
@@ -131,35 +110,10 @@ class LoginPage extends Component {
             </div>
           )}
         />
-        <Link to="/signup"> Do not have an account? Sinup Now </Link>
+        <h4> </h4>
+        <Link to="/login">Already signed up? Login </Link>
       </div>
     );
   }
 }
-/**
- * This takes state from the auth_reducer
- * and map it to props
- *
- * it takes the state and returns
- *  the propse that I want in the commponent
- * in this cast we can destruct the state {auth}
- * and get everything from it
- */
-const mapStateToProps = ({ auth }) => {
-  return {
-    attempLogin: auth.attempLogin,
-    error: auth.error,
-    isAuth: auth.isLogged
-  };
-};
-//attemp to conenct with redux
-/**
- * the first argument it takes is the mapstatetoprops
- * the second is mapdispatchtoprops which is {signIn}
- * the signIn is the action creator from ..auth_actons
- */
-const Login = connect(
-  mapStateToProps,
-  { signIn }
-)(LoginPage);
-export { Login };
+export { Register };
