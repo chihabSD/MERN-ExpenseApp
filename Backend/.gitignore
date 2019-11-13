@@ -1,11 +1,19 @@
-node_modules/
-
-## Logs
-Logs
+# Logs
+logs
 *.log
 npm-debug.log*
 
-## env
-.env
+# Runtime data
+pids
+*.pid
+*.seed
 
+
+# Dependency directories
+node_modules
+
+# npm cache directory
 .npm
+
+# Dot Env
+.env

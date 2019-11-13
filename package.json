@@ -1,0 +1,21 @@
+{
+  "name": "mern-expense-app",
+  "version": "1.0.0",
+  "description": "MERN stack app",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "server": "npm run dev --prefix Backend",
+    "client": " npm start --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chihabSD/MERN-ExpenseApp.git"
+  },
+  "author": "Chihabeddine Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chihabSD/MERN-ExpenseApp/issues"
+  },
+  "homepage": "https://github.com/chihabSD/MERN-ExpenseApp#readme"
+}

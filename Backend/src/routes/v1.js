@@ -1,38 +1,34 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const passport = require("passport");
-const userController = require("../controllers/users.controller");
-const expenseController = require("../controllers/expense.contoller");
+const passport = require('passport');
 
-//Auth and signup
-router.post("/register", userController.register);
-router.post("/login", userController.login);
+const userController = require('../controllers/users.controller');
+const expenseController = require('../controllers/expense.controller');
 
-// Customize and protect the routes
-router.all("*", (req, res, next) => {
-  passport.authenticate("jwt", { session: false }, (err, user) => {
-    if (err || !user) {
-      const error = new Error("You are not authorized to access this area");
-      error.status = 401; // unauthorized error
-      throw error; // throw it for the next handler to catch it
-    }
+// Auth and Sign Up
+router.post('/register', userController.regisetr);
+router.post('/auth', userController.login);
 
-    //
-    req.user = user;
-    return next();
-  })(req, res, next);
+// Customize auth message Protect the  routes
+router.all('*', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user) => {
+        if (err || !user) {
+            const error = new Error('You are not authorized to access this area');
+            error.status = 401;
+            throw error;
+        }
+
+        //
+        req.user = user;
+        return next();
+    })(req, res, next);
 });
 
-// -------------- Protect Routes -----------//
-/**
- * when you want to add passport to a url
- * you have to say : passport.autneticate as middleware and
- * tell the authenticate that i want to use jwt strategy and sesssion
- *
- */
-router.get("/profile", userController.profile);
-router.post("/expense", expenseController.createExpense);
-router.get("/expense", expenseController.get);
-router.delete("/expense/:expense_id", expenseController.deleteExpense);
-router.put("/expense/:expense_id", expenseController.updateExpense);
+// -------------- Protected Routes -------------- //
+router.get('/me', userController.me);
+router.get('/expense/:month?', expenseController.get);
+router.post('/expense', expenseController.create);
+router.put('/expense/:expense_id', expenseController.update);
+router.delete('/expense/:expense_id', expenseController.destroy);
+
 module.exports = router;

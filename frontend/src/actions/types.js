@@ -1,3 +1,22 @@
-export const AUTH_ATTEMP_LOGIN = "AUTH_ATTEMP_LOGIN";
-export const AUTH_SUCCESS = "AUTH_SUCCESS";
-export const AUTH_FAILED = "AUTH_FAILED";
+// handle login
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAILED = 'AUTH_FAILED';
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+export const PROFILE_FEATCHED = 'PROFILE_FEATCHED';
+
+// Handle register
+export const  USER_SAVED = 'USER_SAVED';
+export const  REGISTER_REQUEST = 'USERS_REGISTER_REQUEST';
+export const REGISTER_SUCCESS= 'USERS_REGISTER_SUCCESS';
+export const  REGISTER_FAILURE=  'USERS_REGISTER_FAILURE';
+// Handle expense
+export const EXPENSE_SAVED = 'EXPENSE_SAVED';
+export const EXPENSE_UPDATED = 'EXPENSE_UPDATED';
+export const RESET_SAVED_FLAG = 'RESET_SAVED_FLAG';
+
+export const FETCHING_EXPENSE = 'FETCHING_EXPENSE';
+export const FETCHED_SUCCESS = 'FETCHED_SUCCESS';
+export const FETCHED_FAILED = 'FETCHED_FAILED';
+
+export const ADD_ERROR = 'ADD_ERROR';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';

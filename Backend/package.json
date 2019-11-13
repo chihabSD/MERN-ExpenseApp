@@ -1,40 +1,35 @@
 {
-  "name": "backend",
+  "name": "server",
   "version": "1.0.0",
-  "description": "MERN stack app",
+  "description": "MERN Stack Expense App Tutorial",
   "main": "index.js",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "crypto": "^1.0.1",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-validate": "0.0.8",
-    "express-validator": "^6.1.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.5",
-    "morgan": "^1.9.1",
-    "node-input-validator": "^3.5.0",
-    "nodemailer": "^6.3.0",
-    "nodemon": "^1.19.1",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "uuid": "^3.3.2",
-    "validator": "^11.1.0"
-  },
-  "devDependencies": {},
   "scripts": {
-    "start": "node index",
-    "dev": " nodemon index"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chihabSD/MERN-ExpenseApp.git"
+    "url": "git+https://github.com/abolkog/mern-expense-app.git"
   },
-  "author": "Chihabeddine Ahmed",
+  "author": "Khalid Elshafie",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chihabSD/MERN-ExpenseApp/issues"
+    "url": "https://github.com/abolkog/mern-expense-app/issues"
   },
-  "homepage": "https://github.com/chihabSD/MERN-ExpenseApp#readme"
+  "homepage": "https://github.com/abolkog/mern-expense-app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.11",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import { Home, Login, Register } from "./pages";
-import { NavBar } from "./components";
+import { Route, Switch } from "react-router-dom";
+import { Home, Login, Signup } from "./pages";
+import { NavBar, ProtectedRoute } from "./components";
 import { Container } from "reactstrap";
 
 class App extends Component {
@@ -10,9 +10,11 @@ class App extends Component {
       <div>
         <NavBar />
         <Container>
-          <Route path="/" component={Home} exact />
+          <Switch>
+          <ProtectedRoute path="/" component={Home} exact />
+          </Switch>
           <Route path="/login" component={Login} exact />
-          <Route path="/signup" component={Register} exact />
+          <Route path="/signup" component={Signup} exact />
         </Container>
       </div>
     );
