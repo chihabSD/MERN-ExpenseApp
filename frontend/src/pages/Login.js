@@ -40,14 +40,6 @@ class LoginPage extends Component {
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={this._handleFormSubmit.bind(this)}
-          // validationSchema={Yup.object().shape({
-          //   email: Yup.string()
-          //     .email()
-          //     .required(),
-          //   password: Yup.string()
-          //     .min(6)
-          //     .required()
-          // })}
           render={({
             handleChange,
             handleSubmit,
